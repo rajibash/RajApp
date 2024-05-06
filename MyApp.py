@@ -9,18 +9,8 @@ import streamlit as st
 
 import pandas as pd
 
-temp = [{"Temperature": "Feht", "value": 32}]
-def tempConverter(data):
-    tempCon = 0
-    for item in data:
-        Feht = item.get("value")
-        tempCon = ((Feht - 32) * (5/9))
-        print(f"My Temperature is {tempCon}")
 
-        tempCon = input("Enter your temp")
-    print(tempCon)
-   
-    st.set_page_config(page_title="Temperature Conerter",
+st.set_page_config(page_title="Temperature Converter",
                    page_icon="🔀")
 
 
@@ -28,41 +18,28 @@ def tempConverter(data):
 
 st.subheader("Temperature Converter")
 
-tempConverter = {
-    "Temperature": [],
-    "Value": []
-}
+
+
 
 with st.form(key="form", clear_on_submit=True):
-    Temperature = st.text_input('Enter your Temperature')
-    value = st.number_input('Enter the valuerun')
+    Location = st.text_input('Enter your Location')
+    value = st.number_input('Enter the Temperature in Feht')
     add_btn = st.form_submit_button("Add", type="primary")
 
-# Event handler
-def tempConverter(Temperature, value):
-    if Temperature and value:
-        temp.get('Temperature').append(Temperature)
-        temp.get("value").append(value)
+ 
+
+    # Event handler
+    def tempConverter(Location, value):
+        if Location and value:
+            tempCon = ((value - 32) * (5/9))
+            tempCon = round(tempCon,2)
+            print(f"My Temperature is {tempCon}")
+            return f"Your location Temperature is {tempCon} in celsius"
+            
 
 
-if add_btn:
-    tempConverter(Temperature=Temperature, value=value)
+    if add_btn:
+        display = tempConverter(Location=Location, value=value)
+        st.subheader(display)
 
-# Create a DataFrame Object
-df = pd.DataFrame(temp)
 
-# Display df as a table
-
-if len(temp.get('Temperature')) > 0 and len(value.get('value')) > 0:
-    st.table(df)
-
-amounts_list = temp.get("value")
-temp = [{"Temperature": "Feht", "value": 32}]
-
-tempCon = 0
-for item in temp:
-        Feht = item.get("value")
-        tempCon = ((value - 32) * (5/9))
-        print(f"My Temperature is {tempCon}")
-
-st.subheader(f'Your total expenses is: {tempCon}')
