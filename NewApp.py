@@ -27,8 +27,9 @@ def SalesCalculator(roomNumber, amount):
         if roomNumber and amount:
             Sales =+ amount
             Sales = round(Sales,2)
-            print(f"The total sales for {todays_date} is {Sales}")
-            return f"The total sales for {todays_date} is {Sales}"
+            print(f"The total sales is {Sales}")
+            return f"The total sales is {Sales}"
+          
 date = today's_date = date.today()
 st.subheader(date)
 
